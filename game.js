@@ -23,13 +23,13 @@ let fragmentSize = 30;  // Size of the fragment
 const totalFragments = 5;  // Total number of fragments in the game
 let collectedFragments = 0;  // Number of fragments collected
 
-// Activation button properties
-let activateButton = {
-  x: 0,  // To be set dynamically
-  y: 0,
-  width: 100,  // Width of the activate button
-  height: 50,  // Height of the activate button
-  pressed: false  // Track if the button has been pressed
+// Button position and size
+const activateButton = {
+  x: (canvas.width - 100) / 2,  // Centered on the screen
+  y: canvas.height - 100,        // Positioned at the bottom
+  width: 100,
+  height: 50,
+  pressed: false                  // State of the button (pressed or not)
 };
 
 // Variable to track game state
@@ -150,14 +150,7 @@ function startGame() {
 
 // Function to draw the activate button
 function drawActivateButton() {
-  if (!activateButton.pressed) {
-    ctx.drawImage(activateImage, activateButton.x, activateButton.y, activateButton.width, activateButton.height);
-  } else {
-    // Optionally, you can add visual feedback for a pressed button (e.g., change its color or opacity)
-    ctx.globalAlpha = 0.5;
-    ctx.drawImage(activateImage, activateButton.x, activateButton.y, activateButton.width, activateButton.height);
-    ctx.globalAlpha = 1.0;  // Reset alpha
-  }
+  ctx.drawImage(activateImage, activateButton.x, activateButton.y, activateButton.width, activateButton.height);
 }
 
 // Function to draw the progress bar
@@ -181,6 +174,14 @@ function drawProgressBar() {
   ctx.font = '20px Arial';
   ctx.textAlign = 'center';
   ctx.fillText(`${collectedFragments}/${totalFragments}`, progressBarX + progressBarWidth / 2, progressBarY + progressBarHeight / 2 + 7);
+}
+
+// Function to check if the character is at the activate button position
+function isCharacterAtActivateButton() {
+  return character.x < activateButton.x + activateButton.width &&
+         character.x + character.width > activateButton.x &&
+         character.y < activateButton.y + activateButton.height &&
+         character.y + character.height > activateButton.y;
 }
 
 // Function to draw the game (character, fragments, and progress bar)
@@ -219,28 +220,123 @@ function moveCharacter(x, y) {
   drawGame();  // Redraw the game after moving the character
 }
 
+let targetPosition = { x: character.x, y: character.y };  // The position the character will move to
+let walkingSpeed = 5;  // Speed of walking, you can adjust this
+
+// Move character gradually toward the target position
+function moveCharacterTo(x, y) {
+  targetPosition.x = x - character.width / 2;  // Target position is centered on the click/tap
+  targetPosition.y = y - character.height / 2;
+  drawGame();
+}
+
+// Function to update the character's position each frame
+function updateCharacterPosition() {
+  let dx = targetPosition.x - character.x;
+  let dy = targetPosition.y - character.y;
+  let distance = Math.sqrt(dx * dx + dy * dy);
+
+  // Move the character only if it's far enough from the target
+  if (distance > walkingSpeed) {
+    character.x += (dx / distance) * walkingSpeed;
+    character.y += (dy / distance) * walkingSpeed;
+  } else {
+    // When close enough to the target, snap to the final position
+    character.x = targetPosition.x;
+    character.y = targetPosition.y;
+  }
+}
+
+// Function to draw the game (including character, fragments, progress bar, and activate button)
+function drawGame() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Set the background color
+  ctx.fillStyle = '#008080';  // Teal background
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Draw the player character
+  ctx.drawImage(playerImage, character.x, character.y, character.width, character.height);
+
+  // Draw the random fragments
+  drawFragments();
+
+  // Draw the progress bar
+  drawProgressBar();
+
+  // Draw the activate button
+  drawActivateButton();
+
+  // Check for fragment collection if the button is pressed and the character is at the button
+  if (activateButton.pressed && isCharacterAtActivateButton()) {
+    checkFragmentCollision();
+  }
+}
+
+// Main game loop for continuous animation
+function gameLoop() {
+  if (gameStarted) {
+    updateCharacterPosition();  // Update character position smoothly
+    drawGame();  // Render the game state
+  } else {
+    showLandingPage();  // Show landing page if the game hasn't started
+  }
+  requestAnimationFrame(gameLoop);  // Continue the animation
+}
+
+gameLoop();
+
 // Handle mouse click and touch events
 canvas.addEventListener('click', function(event) {
+  const rect = canvas.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  // Check if the click was within the activate button area
+  if (x >= activateButton.x && x <= activateButton.x + activateButton.width &&
+      y >= activateButton.y && y <= activateButton.y + activateButton.height) {
+    activateButton.pressed = true;  // Set the button as pressed
+    console.log("Activate button pressed!");
+  }
+
+  // If the game hasn't started, start it
   if (!gameStarted) {
-    startGame();  // Start the game from the landing page
+    startGame();  // Start the game if it hasn't started
+    console.log("Game started!");  // Debug log
   } else {
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    moveCharacter(x, y);
+    // Move the character to the clicked position
+    moveCharacterTo(x, y);  
   }
 });
 
 canvas.addEventListener('touchstart', function(event) {
+  const rect = canvas.getBoundingClientRect();
+  const x = event.touches[0].clientX - rect.left;
+  const y = event.touches[0].clientY - rect.top;
+
+  // Check if the click was within the activate button area
+  if (x >= activateButton.x && x <= activateButton.x + activateButton.width &&
+    y >= activateButton.y && y <= activateButton.y + activateButton.height) {
+  activateButton.pressed = true;  // Set the button as pressed
+  console.log("Activate button pressed!");
+}
+
   if (!gameStarted) {
-    startGame();  // Start the game from the landing page
+    startGame();  // Start the game if it hasn't started
   } else {
-    const rect = canvas.getBoundingClientRect();
-    const x = event.touches[0].clientX - rect.left;
-    const y = event.touches[0].clientY - rect.top;
-    moveCharacter(x, y);
+    moveCharacterTo(x, y);  // Move the character to the touched position
   }
 });
+
+// Function to start the game
+function startGame() {
+  gameStarted = true;  // Change game state to started
+  generateFragments(5);  // Generate random fragments
+  drawGame();  // Start the game drawing loop
+}
+
+
+
 
 // Wait for the images to load before displaying the landing page
 playerImage.onload = function() {
