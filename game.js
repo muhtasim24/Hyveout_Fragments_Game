@@ -18,6 +18,8 @@ let character = {
 // Fragments array to hold multiple fragments
 let fragments = [];
 let fragmentSize = 30;  // Size of the fragment
+const totalFragments = 5;  // Total number of fragments in the game
+let collectedFragments = 0;  // Number of fragments collected
 
 // Variable to track game state
 let gameStarted = false;
@@ -58,7 +60,7 @@ function generateFragments(count) {
 }
 
 // Generate random fragment positions before landing page is displayed
-generateFragments(5);  // Generate 5 random fragments
+generateFragments(totalFragments);  // Generate fragments
 
 // Function to draw the fragments on the landing page (static positions)
 function drawLandingFragments() {
@@ -81,6 +83,7 @@ function checkFragmentCollision() {
   fragments.forEach(fragment => {
     if (!fragment.collected && isColliding(character, fragment)) {
       fragment.collected = true;  // Mark fragment as collected
+      collectedFragments++;  // Increment the collected fragments count
     }
   });
 }
@@ -117,7 +120,30 @@ function startGame() {
   drawGame();  // Start the game drawing loop
 }
 
-// Function to draw the game (character and fragments)
+// Function to draw the progress bar
+function drawProgressBar() {
+  const progressBarWidth = 200;
+  const progressBarHeight = 30;
+  const progressBarX = (canvas.width / 2) - (progressBarWidth / 2);
+  const progressBarY = 20;
+
+  // Draw the progress bar background
+  ctx.fillStyle = '#ddd';
+  ctx.fillRect(progressBarX, progressBarY, progressBarWidth, progressBarHeight);
+
+  // Calculate and draw the filled portion of the progress bar
+  const fillWidth = (collectedFragments / totalFragments) * progressBarWidth;
+  ctx.fillStyle = '#76C7C0';  // A teal-like color
+  ctx.fillRect(progressBarX, progressBarY, fillWidth, progressBarHeight);
+
+  // Draw the text in the middle of the progress bar
+  ctx.fillStyle = 'black';
+  ctx.font = '20px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText(`${collectedFragments}/${totalFragments}`, progressBarX + progressBarWidth / 2, progressBarY + progressBarHeight / 2 + 7);
+}
+
+// Function to draw the game (character, fragments, and progress bar)
 function drawGame() {
   ctx.fillStyle = '#008080';  // Clear canvas with teal background
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -130,6 +156,9 @@ function drawGame() {
 
   // Check for fragment collision
   checkFragmentCollision();
+
+  // Draw the progress bar
+  drawProgressBar();
 }
 
 // Function to move the character
