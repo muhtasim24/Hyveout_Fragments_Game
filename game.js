@@ -227,6 +227,14 @@ let walkingSpeed = 5;  // Speed of walking, you can adjust this
 function moveCharacterTo(x, y) {
   targetPosition.x = x - character.width / 2;  // Target position is centered on the click/tap
   targetPosition.y = y - character.height / 2;
+
+  // Check if the character is now at the activate button
+  if (isCharacterAtActivateButton()) {
+    activateButton.pressed = true;  // Set the button as pressed
+    console.log("Activate button pressed!");  // Debug log
+  } else {
+    activateButton.pressed = false; // Reset button state if not at the button
+  }
   drawGame();
 }
 
@@ -268,8 +276,8 @@ function drawGame() {
   drawActivateButton();
 
   // Check for fragment collection if the button is pressed and the character is at the button
-  if (activateButton.pressed && isCharacterAtActivateButton()) {
-    checkFragmentCollision();
+  if (activateButton.pressed) {
+    checkFragmentCollision(); // Check if fragments can be collected
   }
 }
 
