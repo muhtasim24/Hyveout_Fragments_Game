@@ -1,11 +1,13 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-// Create Image objects for the player and fragments
+// Create Image objects for the player, fragments, and activate button
 const playerImage = new Image();
-playerImage.src = 'player.png';  // Path to your player.png file
+playerImage.src = 'player.gif';  // Path to your player.png file
 const fragmentImage = new Image();
 fragmentImage.src = 'fragments.png';  // Path to your fragments.png file
+const activateImage = new Image();
+activateImage.src = 'activate.png';  // Path to your activate.png file
 
 // Character position and size
 let character = {
@@ -21,6 +23,15 @@ let fragmentSize = 30;  // Size of the fragment
 const totalFragments = 5;  // Total number of fragments in the game
 let collectedFragments = 0;  // Number of fragments collected
 
+// Activation button properties
+let activateButton = {
+  x: 0,  // To be set dynamically
+  y: 0,
+  width: 100,  // Width of the activate button
+  height: 50,  // Height of the activate button
+  pressed: false  // Track if the button has been pressed
+};
+
 // Variable to track game state
 let gameStarted = false;
 
@@ -33,6 +44,7 @@ function resizeCanvas() {
     centerCharacter();  // Center the character on landing page
     showLandingPage();  // Redraw landing page after resize
   } else {
+    positionActivateButton();  // Reposition the activate button after resize
     drawGame();  // Redraw game after resize
   }
 }
@@ -41,6 +53,12 @@ function resizeCanvas() {
 function centerCharacter() {
   character.x = canvas.width / 2 - character.width / 2;
   character.y = canvas.height / 2 - character.height / 2;
+}
+
+// Function to position the activate button at the bottom middle of the canvas
+function positionActivateButton() {
+  activateButton.x = canvas.width / 2 - activateButton.width / 2;
+  activateButton.y = canvas.height - activateButton.height - 20;  // 20px padding from the bottom
 }
 
 // Resize the canvas to fit the screen
@@ -81,19 +99,28 @@ function drawFragments() {
 // Function to check if the player collected a fragment
 function checkFragmentCollision() {
   fragments.forEach(fragment => {
-    if (!fragment.collected && isColliding(character, fragment)) {
+    if (!fragment.collected && isColliding(character, fragment) && activateButton.pressed) {
       fragment.collected = true;  // Mark fragment as collected
-      collectedFragments++;  // Increment the collected fragments count
+      collectedFragments++;  // Increase the collected count
+      console.log("Fragment collected")
     }
   });
 }
 
-// Function to detect collision between the player and a fragment
-function isColliding(player, fragment) {
-  return player.x < fragment.x + fragmentSize &&
-         player.x + player.width > fragment.x &&
-         player.y < fragment.y + fragmentSize &&
-         player.y + player.height > fragment.y;
+// Function to detect collision between the player and a fragment or button
+function isColliding(player, object) {
+  return player.x < object.x + fragmentSize &&
+         player.x + player.width > object.x &&
+         player.y < object.y + fragmentSize &&
+         player.y + player.height > object.y;
+}
+
+// Function to check if the character pressed the activate button
+function checkActivateButtonCollision() {
+  if (isColliding(character, activateButton)) {
+    activateButton.pressed = true;  // Mark the button as pressed
+    console.log("Activate button pressed")
+  }
 }
 
 // Function to display the landing page
@@ -117,7 +144,20 @@ function showLandingPage() {
 // Function to start the game
 function startGame() {
   gameStarted = true;  // Change game state to started
+  positionActivateButton();  // Position the activate button
   drawGame();  // Start the game drawing loop
+}
+
+// Function to draw the activate button
+function drawActivateButton() {
+  if (!activateButton.pressed) {
+    ctx.drawImage(activateImage, activateButton.x, activateButton.y, activateButton.width, activateButton.height);
+  } else {
+    // Optionally, you can add visual feedback for a pressed button (e.g., change its color or opacity)
+    ctx.globalAlpha = 0.5;
+    ctx.drawImage(activateImage, activateButton.x, activateButton.y, activateButton.width, activateButton.height);
+    ctx.globalAlpha = 1.0;  // Reset alpha
+  }
 }
 
 // Function to draw the progress bar
@@ -154,17 +194,28 @@ function drawGame() {
   // Draw the random fragments (same positions as on landing page)
   drawFragments();
 
-  // Check for fragment collision
+  // Draw the activate button
+  drawActivateButton();
+
+  // Check for fragment collision only if the button is pressed
   checkFragmentCollision();
 
   // Draw the progress bar
   drawProgressBar();
 }
 
-// Function to move the character
 function moveCharacter(x, y) {
   character.x = x - character.width / 2;  // Adjust so the character stays centered on the touch
   character.y = y - character.height / 2;
+
+  // Check if the character presses the activate button
+  checkActivateButtonCollision();
+
+  // Check for fragment collection if the button is pressed
+  if (activateButton.pressed) {
+    checkFragmentCollision();  // Check if any fragments are collected
+  }
+
   drawGame();  // Redraw the game after moving the character
 }
 
@@ -198,4 +249,7 @@ playerImage.onload = function() {
 };
 fragmentImage.onload = function() {
   // Fragments will also be shown on the landing page
+};
+activateImage.onload = function() {
+  // Activate button image is ready
 };
