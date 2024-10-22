@@ -15,21 +15,27 @@ let character = {
   height: 50  // Set the height of the character
 };
 
-// Fragments array for the game
+// Fragments array to hold multiple fragments
 let fragments = [];
 let fragmentSize = 30;  // Size of the fragment
 
-// Predefined fragment positions for the landing page
-let landingFragments = [
-  { x: 50, y: 50 },
-  { x: canvas.width - 80, y: 100 },
-  { x: canvas.width / 2 - 15, y: canvas.height - 100 },
-  { x: 150, y: 300 },
-  { x: canvas.width - 200, y: canvas.height - 150 }
-];
-
 // Variable to track game state
 let gameStarted = false;
+
+// Function to resize the canvas dynamically
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  if (!gameStarted) {
+    showLandingPage();  // Redraw landing page after resize
+  } else {
+    drawGame();  // Redraw game after resize
+  }
+}
+
+// Resize the canvas to fit the screen
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();  // Initial canvas size setup
 
 // Function to generate random fragments at random positions (for the game)
 function generateFragments(count) {
@@ -43,14 +49,17 @@ function generateFragments(count) {
   }
 }
 
+// Generate random fragment positions before landing page is displayed
+generateFragments(5);  // Generate 5 random fragments
+
 // Function to draw the fragments on the landing page (static positions)
 function drawLandingFragments() {
-  landingFragments.forEach(fragment => {
+  fragments.forEach(fragment => {
     ctx.drawImage(fragmentImage, fragment.x, fragment.y, fragmentSize, fragmentSize);
   });
 }
 
-// Function to draw the fragments during the game (randomized positions)
+// Function to draw the fragments during the game (same positions as landing page)
 function drawFragments() {
   fragments.forEach(fragment => {
     if (!fragment.collected) {
@@ -91,14 +100,12 @@ function showLandingPage() {
   ctx.fillStyle = 'white';
   ctx.font = '30px Arial';
   ctx.textAlign = 'center';
-  ctx.fillText('COLLECT THE PLASMA FRAGMENTS', canvas.width / 2, canvas.height / 2 - 100);
-  ctx.fillText('TAP TO START', canvas.width / 2, canvas.height / 2 + 100);
+  ctx.fillText('Tap to Start', canvas.width / 2, canvas.height / 2 + 100);
 }
 
 // Function to start the game
 function startGame() {
   gameStarted = true;  // Change game state to started
-  generateFragments(5);  // Generate 5 random fragments for the game
   drawGame();  // Start the game drawing loop
 }
 
@@ -110,7 +117,7 @@ function drawGame() {
   // Draw the player character
   ctx.drawImage(playerImage, character.x - character.width / 2, character.y - character.height / 2, character.width, character.height);
 
-  // Draw the random fragments
+  // Draw the random fragments (same positions as on landing page)
   drawFragments();
 
   // Check for fragment collision
