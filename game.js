@@ -9,8 +9,8 @@ fragmentImage.src = 'fragments.png';  // Path to your fragments.png file
 
 // Character position and size
 let character = {
-  x: canvas.width / 2,
-  y: canvas.height / 2,
+  x: 0,  // Initially, set to 0 (we'll center it dynamically)
+  y: 0,
   width: 50,  // Set the width of the character
   height: 50  // Set the height of the character
 };
@@ -26,11 +26,19 @@ let gameStarted = false;
 function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+  
   if (!gameStarted) {
+    centerCharacter();  // Center the character on landing page
     showLandingPage();  // Redraw landing page after resize
   } else {
     drawGame();  // Redraw game after resize
   }
+}
+
+// Function to center the character based on the canvas size
+function centerCharacter() {
+  character.x = canvas.width / 2 - character.width / 2;
+  character.y = canvas.height / 2 - character.height / 2;
 }
 
 // Resize the canvas to fit the screen
@@ -90,8 +98,8 @@ function showLandingPage() {
   ctx.fillStyle = '#008080';  // Set the background to teal
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Draw the player character in the center of the screen
-  ctx.drawImage(playerImage, canvas.width / 2 - character.width / 2, canvas.height / 2 - character.height / 2, character.width, character.height);
+  // Center the player character on the landing page
+  ctx.drawImage(playerImage, character.x, character.y, character.width, character.height);
 
   // Draw the static fragments on the landing page
   drawLandingFragments();
@@ -115,7 +123,7 @@ function drawGame() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   // Draw the player character
-  ctx.drawImage(playerImage, character.x - character.width / 2, character.y - character.height / 2, character.width, character.height);
+  ctx.drawImage(playerImage, character.x, character.y, character.width, character.height);
 
   // Draw the random fragments (same positions as on landing page)
   drawFragments();
@@ -126,8 +134,8 @@ function drawGame() {
 
 // Function to move the character
 function moveCharacter(x, y) {
-  character.x = x;
-  character.y = y;
+  character.x = x - character.width / 2;  // Adjust so the character stays centered on the touch
+  character.y = y - character.height / 2;
   drawGame();  // Redraw the game after moving the character
 }
 
@@ -156,6 +164,7 @@ canvas.addEventListener('touchstart', function(event) {
 
 // Wait for the images to load before displaying the landing page
 playerImage.onload = function() {
+  centerCharacter();  // Ensure the character is centered initially
   showLandingPage();  // Show landing page initially
 };
 fragmentImage.onload = function() {
