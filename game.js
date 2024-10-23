@@ -229,15 +229,13 @@ function isCharacterAtActivateButton() {
          character.y + character.height > activateButton.y;
 }
 
+// Function to handle the activate button press and timer logic
 function handleActivateButton() {
-  // Check if character is at the button and if the button isn't already pressed
+  // Check if the character is at the button and if the button isn't already pressed
   if (isCharacterAtActivateButton() && !activateButton.pressed) {
     activateButton.pressed = true;   // Mark the button as pressed
     activateButton.active = true;    // Allow fragment collection
     console.log("Activate button pressed! Timer started.");
-
-    // Change the button color (or any other visual feedback)
-    drawGame();  // Redraw the game to update the button appearance
 
     // Clear any previous timers to avoid overlapping
     if (activateButton.timer) {
@@ -252,7 +250,7 @@ function handleActivateButton() {
 
       // Reset button color (or any visual indicator)
       drawGame();  // Redraw the game with reset button state
-    }, 200000);  // 200 seconds (adjust time as needed)
+    }, 5000);  // 200 seconds (adjust time as needed)
   }
 }
   
@@ -281,13 +279,13 @@ function moveCharacterTo(x, y) {
   targetPosition.x = x - character.width / 2;  // Target position is centered on the click/tap
   targetPosition.y = y - character.height / 2;
 
-  // Check if the character is now at the activate button
-  if (isCharacterAtActivateButton()) {
-    activateButton.pressed = true;  // Set the button as pressed
-    console.log("Player at Activation button");  // Debug log
-  } else {
-    activateButton.pressed = false; // Reset button state if not at the button
-  }
+  // // Check if the character is now at the activate button
+  // if (isCharacterAtActivateButton()) {
+  //   activateButton.pressed = true;  // Set the button as pressed
+  //   console.log("Player at Activation button");  // Debug log
+  // } else {
+  //   activateButton.pressed = false; // Reset button state if not at the button
+  // }
   drawGame();
 }
 
@@ -311,7 +309,7 @@ function updateCharacterPosition() {
 // Function to draw the game (including character, fragments, progress bar, and activate button)
 function drawGame() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
+
   // Set the background color
   ctx.fillStyle = '#008080';  // Teal background
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -328,8 +326,8 @@ function drawGame() {
   // Draw the activate button
   drawActivateButton();
 
-  // Check for fragment collection if the button is pressed and the character is at the button
-  if (activateButton.pressed) {
+  // Check for fragment collection if the button is active (not when character moves away)
+  if (activateButton.active) {
     checkFragmentCollision(); // Check if fragments can be collected
   }
 }
@@ -349,6 +347,7 @@ function gameLoop() {
 
 gameLoop();
 
+
 // Handle mouse click and touch events
 canvas.addEventListener('click', function(event) {
   const rect = canvas.getBoundingClientRect();
@@ -356,10 +355,8 @@ canvas.addEventListener('click', function(event) {
   const y = event.clientY - rect.top;
 
   // Check if the click was within the activate button area
-  if (x >= activateButton.x && x <= activateButton.x + activateButton.width &&
-      y >= activateButton.y && y <= activateButton.y + activateButton.height) {
-    activateButton.pressed = true;  // Set the button as pressed
-    console.log("Activate button pressed!");
+  if (isCharacterAtActivateButton()) {
+    handleActivateButton();  // Handle button press if the character is at the button
   }
 
   // If the game hasn't started, start it
@@ -368,7 +365,7 @@ canvas.addEventListener('click', function(event) {
     console.log("Game started!");  // Debug log
   } else {
     // Move the character to the clicked position
-    moveCharacterTo(x, y);  
+    moveCharacterTo(x, y);
   }
 });
 
@@ -379,15 +376,14 @@ canvas.addEventListener('touchstart', function(event) {
 
   // Check if the click was within the activate button area
   if (x >= activateButton.x && x <= activateButton.x + activateButton.width &&
-    y >= activateButton.y && y <= activateButton.y + activateButton.height) {
-  activateButton.pressed = true;  // Set the button as pressed
-  console.log("Activate button pressed!");
-}
-
-  if (!gameStarted) {
-    startGame();  // Start the game if it hasn't started
+      y >= activateButton.y && y <= activateButton.y + activateButton.height) {
+    if (!activateButton.pressed) {  // Only activate if not already pressed
+      handleActivateButton();  // Call the function to handle button activation
+    }
+  } else if (gameStarted) {
+    moveCharacterTo(x, y);  // Move the character to the touched position if game started
   } else {
-    moveCharacterTo(x, y);  // Move the character to the touched position
+    startGame();  // Start the game if it hasn't started
   }
 });
 
