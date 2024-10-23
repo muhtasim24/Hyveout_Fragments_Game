@@ -250,7 +250,7 @@ function handleActivateButton() {
 
       // Reset button color (or any visual indicator)
       drawGame();  // Redraw the game with reset button state
-    }, 5000);  // 200 seconds (adjust time as needed)
+    }, 3000);  // 3 seconds (adjust time as needed)
   }
 }
   
