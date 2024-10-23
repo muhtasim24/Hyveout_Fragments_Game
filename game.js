@@ -17,6 +17,9 @@ startImage.src = 'start.png';  // Path to your start.png file
 const titleImage = new Image();
 titleImage.src = 'title.png';  // Path to your title.png file
 
+const lightfieldImage = new Image();
+lightfieldImage.src = 'lightfield.gif';  // Path to your lightfield.gif file
+
 // Character position and size
 let character = {
   x: 0,  // Initially, set to 0 (we'll center it dynamically)
@@ -35,8 +38,8 @@ let collectedFragments = 0;  // Number of fragments collected
 let activateButton = {
   x: 0,
   y: 0,
-  width: 100,
-  height: 50,
+  width: 80,
+  height: 80,
   pressed: false,  // Track if the button is pressed
   timer: null,  // Timer to track 100 seconds
   active: false  // Whether the player can collect fragments
@@ -313,17 +316,29 @@ function drawGame() {
   ctx.fillStyle = '#008080';  // Teal background
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Draw the player character
-  ctx.drawImage(playerImage, character.x, character.y, character.width, character.height);
+  // Draw the random fragments
+  drawFragments();
+  
+  // Draw the activate button
+  drawActivateButton();
 
+  // If the activate button is pressed, draw the lightfield around the character
+  if (activateButton.active) {
+    const lightfieldX = character.x - 10;  // Adjust positioning as needed
+    const lightfieldY = character.y - 10;
+    const lightfieldWidth = character.width + 20;  // Adjust size as needed
+    const lightfieldHeight = character.height + 20;
+    ctx.drawImage(lightfieldImage, lightfieldX, lightfieldY, lightfieldWidth, lightfieldHeight);
+  }
   // Draw the random fragments
   drawFragments();
 
+  // Draw the player character
+  ctx.drawImage(playerImage, character.x, character.y, character.width, character.height);
+  
   // Draw the progress bar
   drawProgressBar();
 
-  // Draw the activate button
-  drawActivateButton();
 
   // Check for fragment collection if the button is active (not when character moves away)
   if (activateButton.active) {
@@ -406,6 +421,4 @@ playerImage.onload = function() {
 fragmentImage.onload = function() {
   // Fragments will also be shown on the landing page
 };
-activateImage.onload = function() {
-  // Activate button image is ready
-};
+
