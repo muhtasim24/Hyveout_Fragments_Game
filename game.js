@@ -6,8 +6,11 @@ const playerImage = new Image();
 playerImage.src = 'player.gif';  // Path to your player.png file
 const fragmentImage = new Image();
 fragmentImage.src = 'fragments.png';  // Path to your fragments.png file
-const activateImage = new Image();
-activateImage.src = 'activate.png';  // Path to your activate.png file
+// Load the button images
+const buttonImage = new Image();
+buttonImage.src = 'button.png'; // Image when button is not pressed
+const pressedButtonImage = new Image();
+pressedButtonImage.src = 'pressedButton.png'; // Image when button is pressed
 // Create Image objects for start and title images
 const startImage = new Image();
 startImage.src = 'start.png';  // Path to your start.png file
@@ -182,20 +185,16 @@ function startGame() {
 }
 
 // Function to draw the activate button
-// Function to draw the activate button, changing color if pressed
 function drawActivateButton() {
-  if (activateButton.pressed) {
-    ctx.fillStyle = '#00FF00';  // Green if pressed
-  } else {
-    ctx.fillStyle = '#FF0000';  // Red if not pressed
-  }
-  ctx.fillRect(activateButton.x, activateButton.y, activateButton.width, activateButton.height);
-
-  // Add some text to indicate it's the "Activate" button
-  ctx.fillStyle = '#FFFFFF';  // White text
-  ctx.font = '20px Arial';
-  ctx.textAlign = 'center';
-  ctx.fillText('Activate', activateButton.x + activateButton.width / 2, activateButton.y + activateButton.height / 2 + 7);
+  const buttonImageToUse = activateButton.pressed ? pressedButtonImage : buttonImage;
+  
+  ctx.drawImage(
+    buttonImageToUse,
+    activateButton.x, 
+    activateButton.y, 
+    activateButton.width, 
+    activateButton.height
+  );
 }
 
 // Function to draw the progress bar
@@ -375,15 +374,17 @@ canvas.addEventListener('touchstart', function(event) {
   const y = event.touches[0].clientY - rect.top;
 
   // Check if the click was within the activate button area
-  if (x >= activateButton.x && x <= activateButton.x + activateButton.width &&
-      y >= activateButton.y && y <= activateButton.y + activateButton.height) {
-    if (!activateButton.pressed) {  // Only activate if not already pressed
-      handleActivateButton();  // Call the function to handle button activation
-    }
-  } else if (gameStarted) {
-    moveCharacterTo(x, y);  // Move the character to the touched position if game started
-  } else {
+  if (isCharacterAtActivateButton()) {
+    handleActivateButton();  // Handle button press if the character is at the button
+  }
+
+  // If the game hasn't started, start it
+  if (!gameStarted) {
     startGame();  // Start the game if it hasn't started
+    console.log("Game started!");  // Debug log
+  } else {
+    // Move the character to the clicked position
+    moveCharacterTo(x, y);
   }
 });
 
