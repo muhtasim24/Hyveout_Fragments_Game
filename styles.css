@@ -108,5 +108,6 @@ body, html {
     /* Styles for mobile phones */
     #button {
       width: 20vw;  
+      bottom: 10vh;
     }
 }
