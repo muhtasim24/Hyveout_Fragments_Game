@@ -51,7 +51,7 @@ const lightfieldGif = 'gifs/lightfield.gif'; // Path to your lightfield GIF
 const lightfieldElement = document.createElement('img');
 lightfieldElement.src = lightfieldGif;
 lightfieldElement.style.position = 'absolute';
-lightfieldElement.style.width = '20vw'; // Adjust size as needed
+lightfieldElement.style.width = '25vw'; // Adjust size as needed
 lightfieldElement.style.height = '20vh'; // Adjust size as needed
 lightfieldElement.style.visibility = 'hidden'; // Initially hidden
 lightfieldElement.style.zIndex = '5';
@@ -59,7 +59,7 @@ gameArea.appendChild(lightfieldElement);
 
 // Crystal settings for responsiveness
 const gifs = ['gifs/crystal.gif'];
-const crystalWidth = 10;
+const crystalWidth = 20;
 const crystalHeight = 10;
 const crystalElements = [];
 function spawnGIF(count) {
