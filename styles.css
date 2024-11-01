@@ -1,0 +1,69 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    background-color: #000; /* Fallback color */
+}
+
+#game-area {
+    position: relative;
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
+    background-image: url('gifs/background.gif'); /* Your background GIF path */
+    background-size: cover; /* Ensures the GIF covers the entire area */
+    background-repeat: no-repeat; /* Prevents the GIF from repeating */
+    background-position: center; /* Centers the GIF */
+}
+
+img {
+    position: absolute; /* Ensure images are positioned absolutely */
+    max-width: 100%; /* Make images responsive */
+    max-height: 100%; /* Make images responsive */
+    user-select: none; /* Prevents image selection */
+}
+
+#progress-container {
+    width: 90%; /* Adjusted for some padding on the sides */
+    max-width: 600px; /* Max width for larger screens */
+    background-color: #ddd; /* Background color of the progress bar */
+    border: 1px solid #999; /* Border around the progress bar */
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    left: 50%; /* Centering the container */
+    transform: translateX(-50%); /* Centering the container */
+}
+
+#progress-bar {
+    width: 0%; /* Initial width of the progress bar */
+    height: 20px; /* Height of the progress bar */
+    background-color: #76c7c0; /* Color of the progress bar */
+    transition: width 0.3s; /* Smooth transition effect */
+}
+
+@media (max-width: 600px) {
+    #progress-container {
+        width: 95%; /* Adjust width on smaller screens */
+    }
+
+    #progress-bar {
+        height: 15px; /* Slightly smaller progress bar */
+    }
+}
+
+@media (min-width: 601px) {
+    #progress-bar {
+        height: 20px; /* Default progress bar height */
+    }
+}
+
+/* Additional styles for the character and crystal images */
+.character {
+    max-width: 15vw; /* Limit max width */
+    max-height: 15vh; /* Limit max height */
+}
+
+.crystal {
+    max-width: 8vw; /* Limit max width for crystals */
+    max-height: 8vh; /* Limit max height for crystals */
+}

@@ -3,22 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plasma Fragment Game</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;  /* Hide scrollbars */
-        }
-        canvas {
-            border: 1px solid black;
-            display: block;
-            margin: auto;
-        }
-    </style>
+    <title>Random GIF Spawner</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <canvas id="gameCanvas"></canvas>
-    <script src="game.js"></script>
+    <div id="game-area"></div>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
