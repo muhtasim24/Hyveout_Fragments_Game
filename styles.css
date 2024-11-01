@@ -52,8 +52,6 @@ body, html {
 .character {
     width: 13vw;
     height: 13vh;
-    max-width: 100px;
-    max-height: 100px;
     z-index: 5;
 }
 
@@ -112,7 +110,7 @@ body, html {
     }
 
     .character {
-        width: 350px;
-        height: 369px;
+        width: 100px;
+        height: 100px;
     }
 }
