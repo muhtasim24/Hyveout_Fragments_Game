@@ -3,7 +3,7 @@ const progressBar = document.getElementById('progress-bar');
 
 // Landing page elements
 const titleElement = document.createElement('img');
-titleElement.src = 'gifs/title.png';
+titleElement.src = 'gifs/Title.png';
 titleElement.id = 'title'; // Add an ID for styling
 titleElement.style.position = 'absolute';
 titleElement.style.width = '60vw';
