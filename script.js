@@ -19,7 +19,7 @@ startButtonElement.id = 'start-button'; // Add an ID for styling
 startButtonElement.style.position = 'absolute';
 startButtonElement.style.width = '40vw';
 startButtonElement.style.height = 'auto';
-startButtonElement.style.top = '70%';
+startButtonElement.style.top = '65%';
 startButtonElement.style.left = '50%';
 startButtonElement.style.transform = 'translate(-50%, -50%)';
 gameArea.appendChild(startButtonElement);
