@@ -39,7 +39,7 @@ const characterHeight = 10;
 const characterElement = document.createElement('img');
 characterElement.src = characterGif;
 characterElement.style.position = 'absolute';
-characterElement.style.width = `13vw`;
+characterElement.style.width = `20vw`;
 characterElement.style.height = `13vh`;
 characterElement.style.zIndex = '5'; // Set z-index for player to be higher
 
