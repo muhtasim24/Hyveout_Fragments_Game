@@ -7,6 +7,10 @@ body, html {
 }
 
 #game-area {
+    display: flex;
+    flex-direction: column; /* Column layout for vertical stacking */
+    justify-content: center; /* Center elements vertically */
+    align-items: center; /* Center elements horizontally */
     position: relative;
     width: 100vw; /* Full width */
     height: 100vh; /* Full height */
@@ -18,8 +22,8 @@ body, html {
 
 img {
     position: absolute; /* Ensure images are positioned absolutely */
-    max-width: 100%; /* Make images responsive */
-    max-height: 100%; /* Make images responsive */
+    max-width: 15vw; /* Make images responsive */
+    max-height: 15vh; /* Make images responsive */
     user-select: none; /* Prevents image selection */
 }
 
@@ -51,19 +55,25 @@ img {
     }
 }
 
-@media (min-width: 601px) {
-    #progress-bar {
-        height: 20px; /* Default progress bar height */
-    }
-}
-
-/* Additional styles for the character and crystal images */
 .character {
-    max-width: 15vw; /* Limit max width */
-    max-height: 15vh; /* Limit max height */
+    max-width: 10vw; /* Limit max width */
+    max-height: 10vh; /* Limit max height */
 }
 
 .crystal {
     max-width: 8vw; /* Limit max width for crystals */
     max-height: 8vh; /* Limit max height for crystals */
+}
+
+#title {
+    width: 30vw; /* Responsive title width */
+    position: absolute;
+    top: 10vh; /* Adjust as needed */
+}
+
+#start-button {
+    width: 20vw; /* Responsive start button width */
+    height: auto; /* Maintain aspect ratio */
+    position: absolute;
+    top: 70%; /* Adjust as needed */
 }

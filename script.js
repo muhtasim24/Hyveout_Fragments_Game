@@ -4,19 +4,21 @@ const progressBar = document.getElementById('progress-bar');
 // Landing page elements
 const titleElement = document.createElement('img');
 titleElement.src = 'gifs/title.png';
+titleElement.id = 'title'; // Add an ID for styling
 titleElement.style.position = 'absolute';
 titleElement.style.width = '30vw';
-titleElement.style.top = '2vh';
+titleElement.style.top = '10vh';
 titleElement.style.left = '50%';
 titleElement.style.transform = 'translateX(-50%)';
 gameArea.appendChild(titleElement);
 
 const startButtonElement = document.createElement('img');
 startButtonElement.src = 'gifs/start.png';
+startButtonElement.id = 'start-button'; // Add an ID for styling
 startButtonElement.style.position = 'absolute';
 startButtonElement.style.width = '20vw';
 startButtonElement.style.height = '10vh';
-startButtonElement.style.top = '50%';
+startButtonElement.style.top = '70%';
 startButtonElement.style.left = '50%';
 startButtonElement.style.transform = 'translate(-50%, -50%)';
 gameArea.appendChild(startButtonElement);
@@ -265,3 +267,16 @@ gameArea.addEventListener('click', (event) => {
         moveCharacter(clickX, clickY);
     }
 });
+
+// Event listener for tapping the game area
+gameArea.addEventListener('touchstart', (event) => {
+  if (!gameStarted) {
+      startGame(); // Start game on first click
+  } else if (canMoveCharacter) {
+      const rect = gameArea.getBoundingClientRect();
+      const clickX = event.clientX - rect.left;
+      const clickY = event.clientY - rect.top;
+      moveCharacter(clickX, clickY);
+  }
+});
+
