@@ -8,7 +8,7 @@ titleElement.id = 'title'; // Add an ID for styling
 titleElement.style.position = 'absolute';
 titleElement.style.width = '60vw';
 titleElement.style.height = 'auto';
-titleElement.style.top = '30%';
+titleElement.style.top = '15%';
 titleElement.style.left = '50%';
 titleElement.style.transform = 'translateX(-50%)';
 gameArea.appendChild(titleElement);
@@ -39,8 +39,8 @@ const characterHeight = 10;
 const characterElement = document.createElement('img');
 characterElement.src = characterGif;
 characterElement.style.position = 'absolute';
-characterElement.style.width = `20vw`;
-characterElement.style.height = `13vh`;
+characterElement.style.width = `25vw`;
+characterElement.style.height = `15vh`;
 characterElement.style.zIndex = '5'; // Set z-index for player to be higher
 
 positionCharacter();
