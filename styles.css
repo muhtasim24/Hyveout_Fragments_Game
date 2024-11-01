@@ -3,77 +3,110 @@ body, html {
     padding: 0;
     overflow: hidden;
     height: 100%;
-    background-color: #000; /* Fallback color */
+    background-color: #000;
 }
 
 #game-area {
     display: flex;
-    flex-direction: column; /* Column layout for vertical stacking */
-    justify-content: center; /* Center elements vertically */
-    align-items: center; /* Center elements horizontally */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    width: 100vw; /* Full width */
-    height: 100vh; /* Full height */
-    background-image: url('gifs/background.gif'); /* Your background GIF path */
-    background-size: cover; /* Ensures the GIF covers the entire area */
-    background-repeat: no-repeat; /* Prevents the GIF from repeating */
-    background-position: center; /* Centers the GIF */
+    width: 100vw;
+    height: 100vh;
+    background-image: url('gifs/background.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-img {
-    position: absolute; /* Ensure images are positioned absolutely */
-    max-width: 15vw; /* Make images responsive */
-    max-height: 15vh; /* Make images responsive */
-    user-select: none; /* Prevents image selection */
-}
-
-#progress-container {
-    width: 90%; /* Adjusted for some padding on the sides */
-    max-width: 600px; /* Max width for larger screens */
-    background-color: #ddd; /* Background color of the progress bar */
-    border: 1px solid #999; /* Border around the progress bar */
+/* img {
     position: absolute;
-    top: 10px; /* Adjust as needed */
-    left: 50%; /* Centering the container */
-    transform: translateX(-50%); /* Centering the container */
-}
+    user-select: none;
+} */
 
-#progress-bar {
-    width: 0%; /* Initial width of the progress bar */
-    height: 20px; /* Height of the progress bar */
-    background-color: #76c7c0; /* Color of the progress bar */
-    transition: width 0.3s; /* Smooth transition effect */
-}
-
-@media (max-width: 600px) {
-    #progress-container {
-        width: 95%; /* Adjust width on smaller screens */
-    }
-
-    #progress-bar {
-        height: 15px; /* Slightly smaller progress bar */
-    }
-}
-
-.character {
-    max-width: 10vw; /* Limit max width */
-    max-height: 10vh; /* Limit max height */
-}
-
-.crystal {
-    max-width: 8vw; /* Limit max width for crystals */
-    max-height: 8vh; /* Limit max height for crystals */
-}
-
+/* Proportional settings for title and start button */
 #title {
-    width: 30vw; /* Responsive title width */
+    width: 20vw;
+    max-width: 300px;
+    height: auto;
     position: absolute;
-    top: 10vh; /* Adjust as needed */
+    top: 20vh; /* Position relative to viewport height */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
 }
 
 #start-button {
-    width: 20vw; /* Responsive start button width */
-    height: auto; /* Maintain aspect ratio */
+    width: 20vw;
+    height: auto;
+    max-width: 250px;
     position: absolute;
-    top: 70%; /* Adjust as needed */
+    top: 70vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+/* Adjust character and crystals */
+.character {
+    width: 13vw;
+    height: 13vh;
+    max-width: 100px;
+    max-height: 100px;
+    z-index: 5;
+}
+
+.crystal {
+    width: 10vw;
+    height: 10vh;
+    max-width: 80px;
+    max-height: 80px;
+}
+
+/* Lightfield effect */
+#lightfield {
+    width: 40vw;
+    height: 40vh;
+    max-width: 300px;
+    max-height: 300px;
+}
+
+/* Button settings */
+#button {
+    position: absolute;
+    width: 10vw;
+    height: auto;
+    max-width: 100px;
+    bottom: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+/* Progress bar */
+#progress-container {
+    width: 90%;
+    max-width: 600px;
+    background-color: #ddd;
+    border: 1px solid #999;
+    position: absolute;
+    top: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#progress-bar {
+    width: 0%;
+    height: 20px;
+    background-color: #76c7c0;
+    transition: width 0.3s;
+}
+
+/* Extra Small Devices */
+@media (max-width: 599px) {
+    /* Styles for mobile phones */
+    #button {
+      width: 20vw;  
+    }
 }

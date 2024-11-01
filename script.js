@@ -6,8 +6,9 @@ const titleElement = document.createElement('img');
 titleElement.src = 'gifs/title.png';
 titleElement.id = 'title'; // Add an ID for styling
 titleElement.style.position = 'absolute';
-titleElement.style.width = '30vw';
-titleElement.style.top = '10vh';
+titleElement.style.width = '60vw';
+titleElement.style.height = 'auto';
+titleElement.style.top = '30%';
 titleElement.style.left = '50%';
 titleElement.style.transform = 'translateX(-50%)';
 gameArea.appendChild(titleElement);
@@ -16,8 +17,8 @@ const startButtonElement = document.createElement('img');
 startButtonElement.src = 'gifs/start.png';
 startButtonElement.id = 'start-button'; // Add an ID for styling
 startButtonElement.style.position = 'absolute';
-startButtonElement.style.width = '20vw';
-startButtonElement.style.height = '10vh';
+startButtonElement.style.width = '40vw';
+startButtonElement.style.height = 'auto';
 startButtonElement.style.top = '70%';
 startButtonElement.style.left = '50%';
 startButtonElement.style.transform = 'translate(-50%, -50%)';
@@ -38,8 +39,10 @@ const characterHeight = 10;
 const characterElement = document.createElement('img');
 characterElement.src = characterGif;
 characterElement.style.position = 'absolute';
-characterElement.style.width = `${characterWidth}vw`;
-characterElement.style.height = `${characterHeight}vh`;
+characterElement.style.width = `13vw`;
+characterElement.style.height = `13vh`;
+characterElement.style.zIndex = '5'; // Set z-index for player to be higher
+
 positionCharacter();
 gameArea.appendChild(characterElement);
 
@@ -48,9 +51,10 @@ const lightfieldGif = 'gifs/lightfield.gif'; // Path to your lightfield GIF
 const lightfieldElement = document.createElement('img');
 lightfieldElement.src = lightfieldGif;
 lightfieldElement.style.position = 'absolute';
-lightfieldElement.style.width = '15vw'; // Adjust size as needed
-lightfieldElement.style.height = '15vh'; // Adjust size as needed
+lightfieldElement.style.width = '20vw'; // Adjust size as needed
+lightfieldElement.style.height = '20vh'; // Adjust size as needed
 lightfieldElement.style.visibility = 'hidden'; // Initially hidden
+lightfieldElement.style.zIndex = '5';
 gameArea.appendChild(lightfieldElement);
 
 // Crystal settings for responsiveness
@@ -112,7 +116,7 @@ function detectCollision() {
 function moveCharacter(targetX, targetY) {
     if (!canMoveCharacter) return;
 
-    const moveSpeed = 5;
+    const moveSpeed = 8;
     let characterX = parseFloat(characterElement.style.left);
     let characterY = parseFloat(characterElement.style.top);
 
@@ -191,12 +195,13 @@ let buttonActive = false; // Flag to check if button is active
 
 const buttonElement = document.createElement('img');
 buttonElement.src = buttonInactiveGif;
-buttonElement.style.position = 'absolute';
-buttonElement.style.width = '10vw';
-buttonElement.style.height = '5vh';
-buttonElement.style.bottom = '2vh';
-buttonElement.style.left = '50%';
-buttonElement.style.transform = 'translateX(-50%)';
+buttonElement.id = 'button';
+// buttonElement.style.position = 'absolute';
+// buttonElement.style.width = '20vw';
+// buttonElement.style.height = 'auto';
+// buttonElement.style.bottom = '2vh';
+// buttonElement.style.left = '50%';
+// buttonElement.style.transform = 'translateX(-50%)';
 gameArea.appendChild(buttonElement);
 
 // Detect button collision
