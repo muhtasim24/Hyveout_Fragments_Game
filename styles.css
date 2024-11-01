@@ -110,4 +110,9 @@ body, html {
       width: 20vw;  
       bottom: 15vh;
     }
+
+    .character {
+        width: 350px;
+        height: 369px;
+    }
 }
