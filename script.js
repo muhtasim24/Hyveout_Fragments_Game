@@ -284,7 +284,7 @@ function playVideo() {
     // videoElement.controls = true; // Optional: Add video controls
     videoElement.onended = () => {
         // Remove the video when it ends
-        window.location.href = 'https://youtu.be/D8iTxZEg7ro?si=SfM30awE74Zh0KVc'; // Replace with your target URL
+        window.location.href = 'https://youtu.be/D8iTxZEg7ro?si=VGILqq9XnEHsscDm'; // Replace with your target URL
         gameArea.removeChild(videoElement);
         restartGame(); // Optional: Restart or end the game
     };
