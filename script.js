@@ -246,11 +246,60 @@ function deactivateButton() {
 const totalCrystals = 5; // Total number of crystals to collect
 let collectedCrystals = 0; // Number of crystals collected
 
+// Function to check if all crystals are collected and play the video
+function checkCrystalsCollected() {
+    if (collectedCrystals === totalCrystals) {
+        playVideo(); // Call the function to play the video
+    }
+}
+
+// Function to play the video
+function playVideo() {
+    // Create a video element
+    // const videoElement = document.createElement('video');
+    const videoElement = document.getElementById('endVideo');
+    videoElement.src = 'gifs/gameEnd.mp4'; // Replace with your video file path
+    videoElement.id = 'end-video';
+    videoElement.style.position = 'absolute';
+    // videoElement.style.top = '50%';
+    // videoElement.style.left = '50%';
+    // videoElement.style.transform = 'translate(-50%, -50%)';
+    videoElement.style.width = '100vw'; // Adjust the size as needed
+    videoElement.style.height = '100vh';
+    videoElement.style.zIndex = '10'; // Make sure it overlays everything
+
+    const gameArea = document.getElementById('game-area');
+        // Hide children of game area but not the container itself
+        Array.from(gameArea.children).forEach((child) => {
+            child.style.display = 'none';
+        });
+    const progressContainer = document.getElementById('progress-container');
+    progressContainer.style.display = 'none';
+
+        // Show and play the end video
+    videoElement.style.display = 'block';
+    videoElement.play();
+
+    videoElement.autoplay = true; // Auto-play the video
+    // videoElement.controls = true; // Optional: Add video controls
+    videoElement.onended = () => {
+        // Remove the video when it ends
+        window.location.href = 'https://youtu.be/D8iTxZEg7ro?si=SfM30awE74Zh0KVc'; // Replace with your target URL
+        gameArea.removeChild(videoElement);
+        restartGame(); // Optional: Restart or end the game
+    };
+
+    // Append the video to the game area
+    gameArea.appendChild(videoElement);
+}
+
 // Function to update the progress bar
 function updateProgressBar() {
     const progressBarElement = document.getElementById('progress-bar');
     const progress = (collectedCrystals / totalCrystals) * 100; // Calculate progress percentage
     progressBarElement.style.width = `${progress}%`; // Update the width of the progress bar
+
+    checkCrystalsCollected();
 }
 
 // Main game loop to detect collisions
