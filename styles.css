@@ -1,11 +1,39 @@
+@font-face {
+    font-family: 'PressStart2P';
+    src: url('pressStart2.ttf') format('truetype');
+}
+
 body, html {
     margin: 0;
     padding: 0;
     overflow: hidden;
     height: 100%;
     background-color: #000;
+    font-family: 'PressStart2P', sans-serif;
+    color: white;
 }
 
+#startTxt{ 
+    z-index: 10;
+    font-size: 20px;
+    font-weight: 150px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 50px auto;
+
+}
+
+#activateTxt {
+    z-index: 10;
+    font-size: 20px;
+    text-align: center;
+    width: 85%;
+    justify-content: center;
+    align-items: center;
+    font-weight: 150px;
+    margin: 50px auto;
+}
 #game-area {
     display: flex;
     flex-direction: column;
