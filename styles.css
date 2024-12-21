@@ -1,7 +1,7 @@
-@font-face {
+/* @font-face {
     font-family: 'PressStart2P';
     src: url('pressStart2.ttf') format('truetype');
-}
+} */
 
 body, html {
     margin: 0;
@@ -9,31 +9,10 @@ body, html {
     overflow: hidden;
     height: 100%;
     background-color: #000;
-    font-family: 'PressStart2P', sans-serif;
-    color: white;
+    /* font-family: 'PressStart2P', sans-serif;
+    color: white; */
 }
-
-#startTxt{ 
-    z-index: 10;
-    font-size: 20px;
-    font-weight: 150px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin: 50px auto;
-
-}
-
-#activateTxt {
-    z-index: 10;
-    font-size: 20px;
-    text-align: center;
-    width: 85%;
-    justify-content: center;
-    align-items: center;
-    font-weight: 150px;
-    margin: 50px auto;
-}
+  
 #game-area {
     display: flex;
     flex-direction: column;
@@ -74,6 +53,19 @@ img {
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
+}
+
+@keyframes rapid-blink {
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0;
+    }
+}
+
+#title, #start-button {
+    animation: rapid-blink 1.8s infinite; /* Adjust the speed by changing 0.5s */
 }
 
 /* Adjust character and crystals */

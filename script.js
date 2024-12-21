@@ -1,28 +1,30 @@
 const gameArea = document.getElementById('game-area');
 const progressBar = document.getElementById('progress-bar');
 
-// // Landing page elements
-// const titleElement = document.createElement('img');
-// titleElement.src = 'gifs/Title.png';
-// titleElement.id = 'title'; // Add an ID for styling
-// titleElement.style.position = 'absolute';
-// titleElement.style.width = '60vw';
-// titleElement.style.height = 'auto';
-// titleElement.style.top = '15%';
-// titleElement.style.left = '50%';
-// titleElement.style.transform = 'translateX(-50%)';
-// gameArea.appendChild(titleElement);
+// Landing page elements
+// const titleElement = document.getElementById('title');
+// const startButtonElement = document.getElementById('start-button');
+const titleElement = document.createElement('img');
+titleElement.src = 'gifs/Title.png';
+titleElement.id = 'title'; // Add an ID for styling
+titleElement.style.position = 'absolute';
+titleElement.style.width = '60vw';
+titleElement.style.height = 'auto';
+titleElement.style.top = '15%';
+titleElement.style.left = '50%';
+titleElement.style.transform = 'translateX(-50%)';
+gameArea.appendChild(titleElement);
 
-// const startButtonElement = document.createElement('img');
-// startButtonElement.src = 'gifs/start.png';
-// startButtonElement.id = 'start-button'; // Add an ID for styling
-// startButtonElement.style.position = 'absolute';
-// startButtonElement.style.width = '40vw';
-// startButtonElement.style.height = 'auto';
-// startButtonElement.style.top = '65%';
-// startButtonElement.style.left = '50%';
-// startButtonElement.style.transform = 'translate(-50%, -50%)';
-// gameArea.appendChild(startButtonElement);
+const startButtonElement = document.createElement('img');
+startButtonElement.src = 'gifs/start.png';
+startButtonElement.id = 'start-button'; // Add an ID for styling
+startButtonElement.style.position = 'absolute';
+startButtonElement.style.width = '40vw';
+startButtonElement.style.height = 'auto';
+startButtonElement.style.top = '65%';
+startButtonElement.style.left = '50%';
+startButtonElement.style.transform = 'translate(-50%, -50%)';
+gameArea.appendChild(startButtonElement);
 
 let gameStarted = false;
 let canMoveCharacter = false;
@@ -85,11 +87,11 @@ spawnGIF(5);
 // const startTxt = document.getElementById('startTxt');
 // const activateTxt = document.getElementById('activateTxt');
 function startGame() {
-    // gameArea.removeChild(titleElement);
-    // gameArea.removeChild(startButtonElement);
+    gameArea.removeChild(titleElement);
+    gameArea.removeChild(startButtonElement);
 
-    startTxt.style.display = "none";
-    activateTxt.style.display = "none";
+    // startTxt.style.display = "none";
+    // activateTxt.style.display = "none";
     gameStarted = true;
     canMoveCharacter = true;
 }
