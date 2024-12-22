@@ -132,25 +132,6 @@ img {
     z-index: 2;
 }
 
-/* Progress bar */
-/* #progress-container {
-    width: 90%;
-    max-width: 600px;
-    background-color: #ddd;
-    border: 1px solid #999;
-    position: absolute;
-    top: 2vh;
-    left: 50%;
-    transform: translateX(-50%);
-} */
-/* 
-#progress-bar {
-    width: 0%;
-    height: 20px;
-    background-color: #76c7c0;
-    transition: width 0.3s;
-} */
-
 /* Extra Small Devices */
 @media (max-width: 599px) {
     /* Styles for mobile phones */

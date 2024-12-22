@@ -2,41 +2,14 @@ const gameArea = document.getElementById('game-area');
 const progressBar = document.getElementById('progress-bar');
 
 // Landing page elements
-// const titleElement = document.getElementById('title');
-// const startButtonElement = document.getElementById('start-button');
 const titleElement = document.getElementById('title');
-// titleElement.src = 'gifs/Title.png';
-// titleElement.id = 'title'; // Add an ID for styling
-// titleElement.style.position = 'absolute';
-// titleElement.style.width = '60vw';
-// titleElement.style.height = 'auto';
-// titleElement.style.top = '15%';
-// titleElement.style.left = '50%';
-// titleElement.style.transform = 'translateX(-50%)';
 gameArea.appendChild(titleElement);
 
 const startButtonElement = document.getElementById('start-button');
-// startButtonElement.src = 'gifs/start.png';
-// startButtonElement.id = 'start-button'; // Add an ID for styling
-// startButtonElement.style.position = 'absolute';
-// startButtonElement.style.width = '40vw';
-// startButtonElement.style.height = 'auto';
-// startButtonElement.style.top = '65%';
-// startButtonElement.style.left = '50%';
-// startButtonElement.style.transform = 'translate(-50%, -50%)';
 gameArea.appendChild(startButtonElement);
 
 // Create the crystal progress image element
 const crystalProgress = document.getElementById('crystal-progress');
-// crystalProgress.src = 'gifs/crystalProgress.png'; // Update path if needed
-// crystalProgress.id = 'crystal-progress';
-// crystalProgress.style.position = 'absolute';
-// crystalProgress.style.width = '20vw'; // Adjust size
-// crystalProgress.style.height = 'auto'; // Maintain aspect ratio
-// crystalProgress.style.top = '4%'; // Top of the screen
-// crystalProgress.style.left = '50%'; // Center horizontally
-// crystalProgress.style.transform = 'translateX(-50%)'; // Center horizontally
-// crystalProgress.style.zIndex = '10'; // Ensure it's visible
 gameArea.appendChild(crystalProgress);
 
 let gameStarted = false;
@@ -97,14 +70,10 @@ function spawnGIF(count) {
 }
 spawnGIF(5);
 
-// const startTxt = document.getElementById('startTxt');
-// const activateTxt = document.getElementById('activateTxt');
 function startGame() {
     gameArea.removeChild(titleElement);
     gameArea.removeChild(startButtonElement);
 
-    // startTxt.style.display = "none";
-    // activateTxt.style.display = "none";
     gameStarted = true;
     canMoveCharacter = true;
 }
@@ -219,12 +188,6 @@ let buttonActive = false; // Flag to check if button is active
 const buttonElement = document.createElement('img');
 buttonElement.src = buttonInactiveGif;
 buttonElement.id = 'button';
-// buttonElement.style.position = 'absolute';
-// buttonElement.style.width = '20vw';
-// buttonElement.style.height = 'auto';
-// buttonElement.style.bottom = '2vh';
-// buttonElement.style.left = '50%';
-// buttonElement.style.transform = 'translateX(-50%)';
 gameArea.appendChild(buttonElement);
 
 // Detect button collision
@@ -281,9 +244,6 @@ function playVideo() {
     videoElement.src = 'gifs/gameEnd.mp4'; // Replace with your video file path
     videoElement.id = 'end-video';
     videoElement.style.position = 'absolute';
-    // videoElement.style.top = '50%';
-    // videoElement.style.left = '50%';
-    // videoElement.style.transform = 'translate(-50%, -50%)';
     videoElement.style.width = '100vw'; // Adjust the size as needed
     videoElement.style.height = '100vh';
     videoElement.style.zIndex = '10'; // Make sure it overlays everything
@@ -311,15 +271,6 @@ function playVideo() {
     // Append the video to the game area
     gameArea.appendChild(videoElement);
 }
-
-// // Function to update the progress bar
-// function updateProgressBar() {
-//     const progressBarElement = document.getElementById('progress-bar');
-//     const progress = (collectedCrystals / totalCrystals) * 100; // Calculate progress percentage
-//     progressBarElement.style.width = `${progress}%`; // Update the width of the progress bar
-
-//     checkCrystalsCollected();
-// }
 
 // Main game loop to detect collisions
 function gameLoop() {
