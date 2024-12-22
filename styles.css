@@ -1,7 +1,7 @@
-/* @font-face {
+@font-face {
     font-family: 'PressStart2P';
     src: url('pressStart2.ttf') format('truetype');
-} */
+}
 
 body, html {
     margin: 0;
@@ -9,8 +9,8 @@ body, html {
     overflow: hidden;
     height: 100%;
     background-color: #000;
-    /* font-family: 'PressStart2P', sans-serif;
-    color: white; */
+    font-family: 'PressStart2P', sans-serif;
+    color: white;
 }
   
 #game-area {
@@ -34,8 +34,8 @@ img {
 
 /* Proportional settings for title and start button */
 #title {
-    width: 20vw;
-    max-width: 300px;
+    width: 50vw;
+    max-width: 500px;
     height: auto;
     position: absolute;
     top: 20vh; /* Position relative to viewport height */
@@ -45,11 +45,11 @@ img {
 }
 
 #start-button {
-    width: 20vw;
+    width: 50vw;
     height: auto;
     max-width: 250px;
     position: absolute;
-    top: 70vh;
+    top: 65vh;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
@@ -67,6 +67,36 @@ img {
 #title, #start-button {
     animation: rapid-blink 1.8s infinite; /* Adjust the speed by changing 0.5s */
 }
+
+
+/* Specific progress container styling */
+.progress-container {
+    position: absolute; /* Ensure the container is fixed */
+    top: 5.5vh; /* Adjust position from the top */
+    left: 65%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    gap: 10px; /* Space between the image and text */
+    z-index: 10; /* Ensure visibility above other elements */
+}
+
+
+#crystal-progress {
+    width: 9vh; 
+    top: 5vh;
+    height: auto;
+    position: absolute; 
+    left: 30%;
+} 
+
+/* Crystal text styling */
+#crystal-text {
+    font-size: 1.8rem; /* Adjust font size */
+    font-weight: bold;
+    color: white; /* Ensure text is visible on a dark background */
+    top: 10vh;
+    height: auto;
+}
+
 
 /* Adjust character and crystals */
 .character {
@@ -103,7 +133,7 @@ img {
 }
 
 /* Progress bar */
-#progress-container {
+/* #progress-container {
     width: 90%;
     max-width: 600px;
     background-color: #ddd;
@@ -112,14 +142,14 @@ img {
     top: 2vh;
     left: 50%;
     transform: translateX(-50%);
-}
-
+} */
+/* 
 #progress-bar {
     width: 0%;
     height: 20px;
     background-color: #76c7c0;
     transition: width 0.3s;
-}
+} */
 
 /* Extra Small Devices */
 @media (max-width: 599px) {

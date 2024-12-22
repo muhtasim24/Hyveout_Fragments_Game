@@ -4,27 +4,41 @@ const progressBar = document.getElementById('progress-bar');
 // Landing page elements
 // const titleElement = document.getElementById('title');
 // const startButtonElement = document.getElementById('start-button');
-const titleElement = document.createElement('img');
-titleElement.src = 'gifs/Title.png';
-titleElement.id = 'title'; // Add an ID for styling
-titleElement.style.position = 'absolute';
-titleElement.style.width = '60vw';
-titleElement.style.height = 'auto';
-titleElement.style.top = '15%';
-titleElement.style.left = '50%';
-titleElement.style.transform = 'translateX(-50%)';
+const titleElement = document.getElementById('title');
+// titleElement.src = 'gifs/Title.png';
+// titleElement.id = 'title'; // Add an ID for styling
+// titleElement.style.position = 'absolute';
+// titleElement.style.width = '60vw';
+// titleElement.style.height = 'auto';
+// titleElement.style.top = '15%';
+// titleElement.style.left = '50%';
+// titleElement.style.transform = 'translateX(-50%)';
 gameArea.appendChild(titleElement);
 
-const startButtonElement = document.createElement('img');
-startButtonElement.src = 'gifs/start.png';
-startButtonElement.id = 'start-button'; // Add an ID for styling
-startButtonElement.style.position = 'absolute';
-startButtonElement.style.width = '40vw';
-startButtonElement.style.height = 'auto';
-startButtonElement.style.top = '65%';
-startButtonElement.style.left = '50%';
-startButtonElement.style.transform = 'translate(-50%, -50%)';
+const startButtonElement = document.getElementById('start-button');
+// startButtonElement.src = 'gifs/start.png';
+// startButtonElement.id = 'start-button'; // Add an ID for styling
+// startButtonElement.style.position = 'absolute';
+// startButtonElement.style.width = '40vw';
+// startButtonElement.style.height = 'auto';
+// startButtonElement.style.top = '65%';
+// startButtonElement.style.left = '50%';
+// startButtonElement.style.transform = 'translate(-50%, -50%)';
 gameArea.appendChild(startButtonElement);
+
+// Create the crystal progress image element
+const crystalProgress = document.getElementById('crystal-progress');
+// crystalProgress.src = 'gifs/crystalProgress.png'; // Update path if needed
+// crystalProgress.id = 'crystal-progress';
+// crystalProgress.style.position = 'absolute';
+// crystalProgress.style.width = '20vw'; // Adjust size
+// crystalProgress.style.height = 'auto'; // Maintain aspect ratio
+// crystalProgress.style.top = '4%'; // Top of the screen
+// crystalProgress.style.left = '50%'; // Center horizontally
+// crystalProgress.style.transform = 'translateX(-50%)'; // Center horizontally
+// crystalProgress.style.zIndex = '10'; // Ensure it's visible
+gameArea.appendChild(crystalProgress);
+
 
 let gameStarted = false;
 let canMoveCharacter = false;
@@ -292,7 +306,6 @@ function playVideo() {
         // Remove the video when it ends
         window.location.href = 'https://youtu.be/D8iTxZEg7ro?si=VGILqq9XnEHsscDm'; // Replace with your target URL
         gameArea.removeChild(videoElement);
-        restartGame(); // Optional: Restart or end the game
     };
 
     // Append the video to the game area
