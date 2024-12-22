@@ -39,7 +39,6 @@ const crystalProgress = document.getElementById('crystal-progress');
 // crystalProgress.style.zIndex = '10'; // Ensure it's visible
 gameArea.appendChild(crystalProgress);
 
-
 let gameStarted = false;
 let canMoveCharacter = false;
 let firstClick = true; // Flag to detect the first click
@@ -110,6 +109,9 @@ function startGame() {
     canMoveCharacter = true;
 }
 
+const totalCrystals = 5; // Total number of crystals to collect
+let collectedCrystals = 0; // Number of crystals collected
+const crystalText = document.getElementById('collected');
 
 // Modify the existing detectCollision function
 function detectCollision() {
@@ -127,7 +129,8 @@ function detectCollision() {
             gameArea.removeChild(crystalElements[i]);
             crystalElements.splice(i, 1);
             collectedCrystals++;
-            updateProgressBar(); // Call the update function when a crystal is collected
+            crystalText.innerText = collectedCrystals;
+            checkCrystalsCollected();
         }
     }
 }
@@ -263,9 +266,6 @@ function deactivateButton() {
     lightfieldElement.style.visibility = 'hidden'; // Hide lightfield
 }
 
-const totalCrystals = 5; // Total number of crystals to collect
-let collectedCrystals = 0; // Number of crystals collected
-
 // Function to check if all crystals are collected and play the video
 function checkCrystalsCollected() {
     if (collectedCrystals === totalCrystals) {
@@ -312,14 +312,14 @@ function playVideo() {
     gameArea.appendChild(videoElement);
 }
 
-// Function to update the progress bar
-function updateProgressBar() {
-    const progressBarElement = document.getElementById('progress-bar');
-    const progress = (collectedCrystals / totalCrystals) * 100; // Calculate progress percentage
-    progressBarElement.style.width = `${progress}%`; // Update the width of the progress bar
+// // Function to update the progress bar
+// function updateProgressBar() {
+//     const progressBarElement = document.getElementById('progress-bar');
+//     const progress = (collectedCrystals / totalCrystals) * 100; // Calculate progress percentage
+//     progressBarElement.style.width = `${progress}%`; // Update the width of the progress bar
 
-    checkCrystalsCollected();
-}
+//     checkCrystalsCollected();
+// }
 
 // Main game loop to detect collisions
 function gameLoop() {
