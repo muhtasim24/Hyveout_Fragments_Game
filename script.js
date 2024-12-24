@@ -81,6 +81,7 @@ function startGame() {
 const totalCrystals = 5; // Total number of crystals to collect
 let collectedCrystals = 0; // Number of crystals collected
 const crystalText = document.getElementById('collected');
+const sound = document.getElementById('sound');
 
 // Modify the existing detectCollision function
 function detectCollision() {
@@ -97,6 +98,7 @@ function detectCollision() {
         ) {
             gameArea.removeChild(crystalElements[i]);
             crystalElements.splice(i, 1);
+            sound.play();
             collectedCrystals++;
             crystalText.innerText = collectedCrystals;
             checkCrystalsCollected();
