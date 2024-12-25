@@ -24,25 +24,14 @@ const characterGif = 'gifs/characterleft.gif';
 const characterWidth = 8;
 const characterHeight = 10;
 
-const characterElement = document.createElement('img');
-characterElement.src = characterGif;
-characterElement.style.position = 'absolute';
-characterElement.style.width = `25vw`;
-characterElement.style.height = `15vh`;
-characterElement.style.zIndex = '5'; // Set z-index for player to be higher
+const characterElement = document.getElementById('character');
 
 positionCharacter();
 gameArea.appendChild(characterElement);
 
 // Initialize lightfield element
 const lightfieldGif = 'gifs/lightfield.gif'; // Path to your lightfield GIF
-const lightfieldElement = document.createElement('img');
-lightfieldElement.src = lightfieldGif;
-lightfieldElement.style.position = 'absolute';
-lightfieldElement.style.width = '30vw'; // Adjust size as needed
-lightfieldElement.style.height = '20vh'; // Adjust size as needed
-lightfieldElement.style.visibility = 'hidden'; // Initially hidden
-lightfieldElement.style.zIndex = '5';
+const lightfieldElement = document.getElementById('lightfield');
 gameArea.appendChild(lightfieldElement);
 
 // Crystal settings for responsiveness
@@ -158,7 +147,7 @@ function updateLightfieldPosition() {
 }
 
 function positionCharacter() {
-    const centerX = (window.innerWidth - (characterWidth * window.innerWidth / 100)) / 2;
+    const centerX = (window.innerWidth - (characterWidth * window.innerWidth / 100 + 70)) / 2;
     const centerY = (window.innerHeight - (characterHeight * window.innerHeight / 100)) / 2;
     characterElement.style.left = `${centerX}px`;
     characterElement.style.top = `${centerY}px`;

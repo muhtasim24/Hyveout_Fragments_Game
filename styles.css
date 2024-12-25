@@ -100,8 +100,9 @@ img {
 
 /* Adjust character and crystals */
 .character {
-    width: 13vw;
-    height: 13vh;
+    position: absolute;
+    width: 15vw;
+    height: 15vh;
     z-index: 5;
 }
 
@@ -114,10 +115,10 @@ img {
 
 /* Lightfield effect */
 #lightfield {
-    width: 40vw;
-    height: 40vh;
-    max-width: 300px;
-    max-height: 300px;
+    width: 30vw;
+    height: 20vh;
+    z-index: 5;
+    visibility: hidden;
 }
 
 /* Button settings */
@@ -143,5 +144,26 @@ img {
     .character {
         width: 100px;
         height: 100px;
+    }
+}
+
+@media (min-width: 992px) {
+    /* Styles for Laptops and Desktops phones */
+    #crystal-text{
+        display: flex;
+        width: 470px;
+        font-size: 2.5rem;
+    }
+
+    #crystal-progress{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 6vw;
+        left: 43%;
+    }
+
+    #lightfield{
+        width: 20vw;
     }
 }
