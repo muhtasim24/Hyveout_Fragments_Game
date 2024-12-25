@@ -46,6 +46,7 @@ function spawnGIF(count) {
         gifElement.style.position = 'absolute';
         gifElement.style.width = `${crystalWidth}vw`;
         gifElement.style.height = `${crystalHeight}vh`;
+        gifElement.style.pointerEvents = 'none';
 
         const maxX = window.innerWidth - (crystalWidth * window.innerWidth / 100);
         const maxY = window.innerHeight - (crystalHeight * window.innerHeight / 100);
@@ -179,6 +180,7 @@ let buttonActive = false; // Flag to check if button is active
 const buttonElement = document.createElement('img');
 buttonElement.src = buttonInactiveGif;
 buttonElement.id = 'button';
+buttonElement.style.pointerEvents='none';
 gameArea.appendChild(buttonElement);
 
 // Detect button collision
