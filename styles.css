@@ -151,7 +151,7 @@ img {
     /* Styles for Laptops and Desktops phones */
     #crystal-text{
         display: flex;
-        width: 470px;
+        width: 400px;
         font-size: 2.5rem;
     }
 
