@@ -60,12 +60,14 @@ function spawnGIF(count) {
 }
 spawnGIF(5);
 
+const backgroundSound = document.getElementById("background-sound");
 function startGame() {
     gameArea.removeChild(titleElement);
     gameArea.removeChild(startButtonElement);
 
     gameStarted = true;
     canMoveCharacter = true;
+    backgroundSound.play();
 }
 
 const totalCrystals = 5; // Total number of crystals to collect
