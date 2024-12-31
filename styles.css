@@ -34,7 +34,7 @@ img {
 
 /* Proportional settings for title and start button */
 #title {
-    width: 50vw;
+    width: 60vw;
     max-width: 500px;
     height: auto;
     position: absolute;
@@ -45,7 +45,7 @@ img {
 }
 
 #start-button {
-    width: 55vw;
+    width: 60vw;
     height: auto;
     max-width: 250px;
     position: absolute;
@@ -65,7 +65,7 @@ img {
 }
 
 #title, #start-button {
-    animation: rapid-blink 2.5s infinite; /* Adjust the speed by changing 0.5s */
+    animation: rapid-blink 5.5s infinite; /* Adjust the speed by changing 0.5s */
 }
 
 
