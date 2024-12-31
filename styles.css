@@ -151,7 +151,7 @@ img {
     .character {
         width: 100px;
         height: 100px;
-        transform: translateX(-30%);  /* Move the character 20% to the left */
+        transform: translate(-30%, -45%);  /* Move the character 20% to the left */
 
     }
 }
@@ -197,7 +197,7 @@ img {
     .character {
         width: 8vw; /* Proportional to the viewport width */
         height: auto;
-        transform: translateX(-30%);  /* Move the character 20% to the left */
+        transform: translate(-30%, -35%);  /* Move the character 20% to the left */
 
     }
 
@@ -218,9 +218,5 @@ img {
         width: 8vw;
         height: auto;
         max-width: 100px;
-    }
-
-    #end-video {
-
     }
 }
