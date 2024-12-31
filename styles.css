@@ -186,6 +186,9 @@ img {
     #start-button {
         width: 30%; /* Relative to the #game-area or body */
         max-width: 250px;
+        top: 60vh;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     #crystal-text {
@@ -219,4 +222,5 @@ img {
         height: auto;
         max-width: 100px;
     }
+
 }
