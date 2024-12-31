@@ -67,6 +67,7 @@ function startGame() {
 
     gameStarted = true;
     canMoveCharacter = true;
+    backgroundSound.volume = 0.4;
     backgroundSound.play();
 }
 
