@@ -133,6 +133,13 @@ img {
     z-index: 2;
 }
 
+#end-video{
+    position: absolute;
+    width: 100vw; 
+    height: 100vh;
+    z-index: 10;
+}
+
 /* Extra Small Devices */
 @media (max-width: 599px) {
     /* Styles for mobile phones */
@@ -144,89 +151,76 @@ img {
     .character {
         width: 100px;
         height: 100px;
+        transform: translateX(-30%);  /* Move the character 20% to the left */
+
     }
 }
 
-/* @media (min-width: 992px) { */
-    /* #crystal-text{
-        display: flex;
-        width: 400px;
-        font-size: 2.5rem;
-    }
 
-    #crystal-progress{
+@media (min-width: 992px) {
+    body, html {
+        margin: 0;
+        padding: 0;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 6vw;
-        left: 43%;
+        width: 30vw; /* Set the fixed width of the body */
+        height: 100vh; /* Ensure it stretches to the viewport height */
+        background-color: black; /* Black background for the rest of the screen */
+        margin: 0 auto;
     }
 
-    #lightfield{
-        width: 20vw;
-    }  */
-    @media (min-width: 992px) {
-        body, html {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 30vw; /* Set the fixed width of the body */
-            height: 100vh; /* Ensure it stretches to the viewport height */
-            background-color: black; /* Black background for the rest of the screen */
-            margin: 0 auto;
-        }
-    
-        #game-area {
-            width: 100%; /* Make the game area take up the full width of the body */
-            height: 100%; /* Adjust height to match the body's height */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-image: url('gifs/background.gif');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-    
-        /* Ensure all child elements are proportional to the body */
-        #title {
-            width: 80%; /* Relative to the #game-area or body */
-            max-width: 500px;
-        }
-    
-        #start-button {
-            width: 60%; /* Relative to the #game-area or body */
-            max-width: 250px;
-        }
-    
-        #crystal-text {
-            font-size: 1.5rem; /* Adjust font size proportionally */
-        }
-    
-        .character {
-            width: 10vw; /* Proportional to the viewport width */
-            height: auto;
-        }
-    
-        .crystal {
-            width: 10vw;
-            height: auto;
-            max-width: 80px;
-            max-height: 80px;
-        }
-    
-        #lightfield {
-            width: 15vw;
-            height: auto;
-        }
-    
-        #button {
-            width: 8vw;
-            height: auto;
-            max-width: 100px;
-        }
+    #game-area {
+        position: relative;
+        width: 100%; /* or desired percentage */
+        height: 100%; /* or viewport height */
+        overflow: hidden; /* Prevents elements from spilling outside */
     }
-    
+
+    /* Ensure all child elements are proportional to the body */
+    #title {
+        width: 50%; /* Relative to the #game-area or body */
+        max-width: 500px;
+    }
+
+    #start-button {
+        width: 30%; /* Relative to the #game-area or body */
+        max-width: 250px;
+    }
+
+    #crystal-text {
+        display: flex;
+        width: 450px;
+        font-size: 2rem;
+    }
+
+    .character {
+        width: 8vw; /* Proportional to the viewport width */
+        height: auto;
+        transform: translateX(-30%);  /* Move the character 20% to the left */
+
+    }
+
+    .crystal {
+        position: absolute;
+        width: 50vw; /* Adjust size as needed */
+        height: auto;
+    }
+
+    #lightfield {
+        width: 14vw;
+        height: auto;
+        position: absolute;
+        z-index: 20;
+    }
+
+    #button {
+        width: 8vw;
+        height: auto;
+        max-width: 100px;
+    }
+
+    #end-video {
+
+    }
+}

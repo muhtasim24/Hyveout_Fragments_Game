@@ -47,9 +47,11 @@ function spawnGIF(count) {
         gifElement.style.width = `${crystalWidth}vw`;
         gifElement.style.height = `${crystalHeight}vh`;
         gifElement.style.pointerEvents = 'none';
+        gifElement.className = 'crystal';
 
-        const maxX = window.innerWidth - (crystalWidth * window.innerWidth / 100);
-        const maxY = window.innerHeight - (crystalHeight * window.innerHeight / 100);
+
+        const maxX = gameArea.offsetWidth- (crystalWidth * gameArea.offsetWidth / 100);
+        const maxY = gameArea.offsetHeight - (crystalHeight * gameArea.offsetHeight / 100);
 
         gifElement.style.left = `${Math.random() * maxX}px`;
         gifElement.style.top = `${Math.random() * maxY}px`;
@@ -107,8 +109,9 @@ function moveCharacter(targetX, targetY) {
     let characterX = parseFloat(characterElement.style.left);
     let characterY = parseFloat(characterElement.style.top);
 
-    const maxX = window.innerWidth - (characterWidth * window.innerWidth / 100);
-    const maxY = window.innerHeight - (characterHeight * window.innerHeight / 100);
+
+    const maxX = gameArea.offsetWidth - (characterWidth * gameArea.offsetWidth / 100);
+    const maxY = gameArea.offsetHeight - (characterHeight * gameArea.offsetHeight / 100);
 
     targetX = Math.max(0, Math.min(targetX, maxX));
     targetY = Math.max(0, Math.min(targetY, maxY));
@@ -146,13 +149,23 @@ function moveCharacter(targetX, targetY) {
 // Update lightfield position to center around the character
 function updateLightfieldPosition() {
     const characterRect = characterElement.getBoundingClientRect();
-    lightfieldElement.style.left = `${characterRect.left - (lightfieldElement.offsetWidth - characterRect.width) / 2}px`;
-    lightfieldElement.style.top = `${characterRect.top - (lightfieldElement.offsetHeight - characterRect.height) / 2}px`;
+    const gameAreaRect = gameArea.getBoundingClientRect();
+
+    // Calculate the lightfield position relative to the game area
+    const lightfieldX = characterRect.left - gameAreaRect.left - (lightfieldElement.offsetWidth - characterRect.width) / 2;
+    const lightfieldY = characterRect.top - gameAreaRect.top - (lightfieldElement.offsetHeight - characterRect.height) / 2;
+
+    // Update the lightfield's position
+    lightfieldElement.style.position = 'absolute';
+    lightfieldElement.style.left = `${lightfieldX}px`;
+    lightfieldElement.style.top = `${lightfieldY}px`;
+    lightfieldElement.style.zIndex = '10'; //
 }
 
 function positionCharacter() {
-    const centerX = (window.innerWidth - (characterWidth * window.innerWidth / 100 + 70)) / 2;
-    const centerY = (window.innerHeight - (characterHeight * window.innerHeight / 100)) / 2;
+
+    const centerX = (gameArea.offsetWidth- (characterWidth * gameArea.offsetWidth/ 100)) / 2;
+    const centerY = (gameArea.offsetHeight - (characterHeight * gameArea.offsetHeight / 100)) / 2;
     characterElement.style.left = `${centerX}px`;
     characterElement.style.top = `${centerY}px`;
 }
@@ -165,10 +178,11 @@ window.addEventListener('resize', () => {
     repositionCrystals();
 });
 
+
 function repositionCrystals() {
     for (let i = 0; i < crystalElements.length; i++) {
-        const maxX = window.innerWidth - (crystalWidth * window.innerWidth / 100);
-        const maxY = window.innerHeight - (crystalHeight * window.innerHeight / 100);
+        const maxX = gameArea.offsetWidth - (crystalWidth * gameArea.offsetWidth / 100);
+        const maxY = gameArea.offsetHeight - (crystalHeight * gameArea.offsetHeight / 100);
 
         crystalElements[i].style.left = `${Math.random() * maxX}px`;
         crystalElements[i].style.top = `${Math.random() * maxY}px`;
@@ -237,12 +251,6 @@ function playVideo() {
     // Create a video element
     // const videoElement = document.createElement('video');
     const videoElement = document.getElementById('endVideo');
-    videoElement.src = 'gifs/gameEnd.mp4'; // Replace with your video file path
-    videoElement.id = 'end-video';
-    videoElement.style.position = 'absolute';
-    videoElement.style.width = '100vw'; // Adjust the size as needed
-    videoElement.style.height = '100vh';
-    videoElement.style.zIndex = '10'; // Make sure it overlays everything
 
     const gameArea = document.getElementById('game-area');
         // Hide children of game area but not the container itself
