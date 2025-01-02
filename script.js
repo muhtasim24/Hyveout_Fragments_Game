@@ -180,6 +180,15 @@ window.addEventListener('resize', () => {
 
 
 function repositionCrystals() {
+    if (window.innerWidth <= 768){
+        for (let i = 0; i < crystalElements.length; i++) {
+            const maxX = window.innerWidth - (crystalWidth * window.innerWidth / 100);
+            const maxY = window.innerHeight - (crystalHeight * window.innerHeight / 100);
+    
+            crystalElements[i].style.left = `${Math.random() * maxX}px`;
+            crystalElements[i].style.top = `${Math.random() * maxY}px`;
+        }
+    } else {
     for (let i = 0; i < crystalElements.length; i++) {
         const crystalElement = crystalElements[i]
         const maxX = gameArea.offsetWidth - (crystalElement.offsetWidth * gameArea.offsetHeight / 100);
@@ -187,7 +196,7 @@ function repositionCrystals() {
 
         crystalElements[i].style.left = `${Math.random() * maxX}px`;
         crystalElements[i].style.top = `${Math.random() * maxY}px`;
-    }
+    }}
 }
 
 // Initialize button element
