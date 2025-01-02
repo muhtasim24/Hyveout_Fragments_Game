@@ -111,6 +111,7 @@ img {
     height: 10vh;
     max-width: 80px;
     max-height: 80px;
+    z-index: 5;
 }
 
 /* Lightfield effect */
