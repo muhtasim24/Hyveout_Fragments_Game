@@ -49,12 +49,18 @@ function spawnGIF(count) {
         gifElement.style.pointerEvents = 'none';
         gifElement.className = 'crystal';
 
+        if (window.innerWidth <= 768) {
+            const maxX = window.innerWidth - (crystalWidth * window.innerWidth / 100);
+            const maxY = window.innerHeight - (crystalHeight * window.innerHeight / 100);  
+            gifElement.style.left = `${Math.random() * maxX}px`;
+            gifElement.style.top = `${Math.random() * maxY}px`; 
+        } else{
+            const maxX = gameArea.offsetWidth- (crystalWidth * gameArea.offsetWidth / 100);
+            const maxY = gameArea.offsetHeight - (crystalHeight * gameArea.offsetHeight / 100);
+            gifElement.style.left = `${Math.random() * maxX}px`;
+            gifElement.style.top = `${Math.random() * maxY}px`;
+    }
 
-        const maxX = gameArea.offsetWidth- (crystalWidth * gameArea.offsetWidth / 100);
-        const maxY = gameArea.offsetHeight - (crystalHeight * gameArea.offsetHeight / 100);
-
-        gifElement.style.left = `${Math.random() * maxX}px`;
-        gifElement.style.top = `${Math.random() * maxY}px`;
 
         gameArea.appendChild(gifElement);
         crystalElements.push(gifElement); // Keep track for future interactions
