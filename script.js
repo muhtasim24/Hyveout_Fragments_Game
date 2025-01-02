@@ -182,8 +182,8 @@ window.addEventListener('resize', () => {
 function repositionCrystals() {
     for (let i = 0; i < crystalElements.length; i++) {
         const crystalElement = crystalElements[i]
-        const maxX = gameArea.offsetWidth - crystalElement.offsetWidth;
-        const maxY = gameArea.offsetHeight - crystalElement.offsetHeight;
+        const maxX = gameArea.offsetWidth - (crystalElement.offsetWidth * gameArea.offsetHeight / 100);
+        const maxY = gameArea.offsetHeight - (crystalElement.offsetHeight * gameArea.offsetHeight / 100);
 
         crystalElements[i].style.left = `${Math.random() * maxX}px`;
         crystalElements[i].style.top = `${Math.random() * maxY}px`;
