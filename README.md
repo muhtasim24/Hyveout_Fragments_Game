@@ -12,10 +12,12 @@ The **Fragments Game** is a fun and interactive web-based game created using **H
 
 ## About
 
-**Fragments Game** is a simple browser game that offers an engaging way to interact with a music video. The game presents fragments of a music video that users need to piece together, adding an element of fun to the viewing experience.
+**Fragments Game** is a simple browser game that offers an engaging way to interact with a music video. The game presents fragments of a music video that users need to piece together, adding an element of fun to the viewing experience. Once players collect all fragments, it will take you to the music video.
 
 Feel free to check out the music video linked below to see how the game connects to the content.
 
+
+**Game Link**: [https://hyveout-fragments-game.vercel.app/]
 **Music Video Link**: [https://youtu.be/09DHdnKO2iw?si=mnfd99V1YGmmu1E4]
 
 ## Technologies
@@ -34,6 +36,3 @@ This game was built using the following technologies:
 - To collect crystals, you need to activate the lightfield by pressing the Activate LightField Button
 - Hurry up since you only have a few seconds, but you can press it again
 - Enjoy the interactive challenge while listening to the music!
-
-## Play the Game 
-
